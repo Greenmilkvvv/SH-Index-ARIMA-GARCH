@@ -2,6 +2,7 @@
 
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 from arch import arch_model
 from config import ARIMA_ORDER
 
@@ -47,7 +48,7 @@ def rolling_arima_forecast(
     forecasts = np.zeros(n_test)
     residuals_test = np.zeros(n_test)
 
-    for i in range(n_test):
+    for i in tqdm(range(n_test), desc="ARIMA 滚动预测"):
         # 对 t+i 时刻做一步向前预测
         try:
             model = ARIMA(history, order=ARIMA_ORDER)
@@ -110,7 +111,7 @@ def rolling_garch_forecast(
     window = list(scaled_train)  # 以缩放后的残差作为历史
     current_var = fitted.conditional_volatility[-1]  # 上一期条件方差（缩放尺度）
 
-    for i in range(n_test):
+    for i in tqdm(range(n_test), desc="GARCH 滚动波动率预测"):
         # GARCH(1,1): sigma²_t = omega + alpha * eps²_{t-1} + beta * sigma²_{t-1}
         # EGARCH(1,1): ln(sigma²_t) = omega + beta * ln(sigma²_{t-1})
         #                                + alpha * (|z_{t-1}| - E[|Z|]) + gamma * z_{t-1}

@@ -101,7 +101,7 @@ def generate_report(
     lines.append(f"- **全量样本**: {full_dates[0].date()} 至 {full_dates[1].date()}，共 {len(full_dates) if isinstance(full_dates, (list, pd.DatetimeIndex)) else '?'} 个交易日")
     lines.append(f"- **训练集**: {train_dates[0].date()} 至 {train_dates[1].date()}，共 {n_train} 个观测")
     lines.append(f"- **测试集**: {test_dates[0].date()} 至 {test_dates[1].date()}，共 {n_test} 个观测（论文中2024年1月 – 2025年6月）")
-    lines.append(f"- **分析变量**: 每日对数收益率 $r_t = \\ln(P_t) - \\ln(P_{t-1})$")
+    lines.append(r"- **分析变量**: 每日对数收益率 $r_t = \ln(P_t) - \ln(P_{t-1})$")
     lines.append("")
 
     # 2. 平稳性检验 & 图
