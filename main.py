@@ -1,5 +1,6 @@
 # main.py —— 主控脚本，一键运行全流程
 # 用法: py -3.10 main.py
+# vvvvvv
 
 import sys
 import numpy as np
